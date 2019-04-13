@@ -1,0 +1,81 @@
+
+
+1.方法签名 （必须要会）
+方法签名代表着一个方法的唯一性
+比如
+public native String stringFromJNI();  //           ()Ljava/lang/String;
+方法签名就是 1.没有参数 () 2.返回值得数据类型为String L+对象包名+;
+
+
+//TODO
+
+
+
+2.JNIOnload
+当Android的VM(Virtual Machine)执行到C组件(即*so档)里的System.loadLibrary()函数时，
+首先会去执行C组件里的JNI_OnLoad()函数。
+
+3.可变参数
+__VA_ARGS__ 可变参数 可以是多个 也可以是一个 类似java的vargs
+
+
+4.C++默认返回码
+
+
+#define JNI_OK          (0)         /* no error */
+#define JNI_ERR         (-1)        /* generic error */
+#define JNI_EDETACHED   (-2)        /* thread detached from the VM */
+#define JNI_EVERSION    (-3)        /* JNI version error */
+#define JNI_ENOMEM      (-4)        /* Out of memory */
+#define JNI_EEXIST      (-5)        /* VM already created */
+#define JNI_EINVAL      (-6)        /* Invalid argument *
+
+5.不懂得代码
+
+JavaVM *vm 是虚拟机在 JNI 层的代表 一个进程只有一个 JavaVM，所有的线程共用一个 JavaVM
+
+JNIEnv 表示 Java 调用 native 语言的环境，是一个封装了几乎全部 JNI 方法的指针 (JNI Enviroment )  通过指针可以操作java端代码
+JNIEnv 只在创建它的线程生效，不能跨线程传递，不同线程的 JNIEnv 彼此独立。
+
+env->NewStringUTF(hello.c_str()) //env->代表使用JNI提供的方法API
+
+
+//通过VM之指标而取得JNIEnv之指标值，并存入env指标变数里
+ if(vm->GetEnv((void**)&env,JNI_VERSION_1_6)!=JNI_OK){
+        return JNI_ERR;
+ }
+
+
+ 6. SO库路径
+
+ D:\Start\app\build\intermediates\cmake\debug\obj\arm64-v8a
+
+
+ 7.第三方SO库中的native方法如何调？ 如果提供了jar包 通过jar包提供的api应该可以调
+
+ 如果是公司内部的SO库 除了调用外 还需要扩展？  将自己的SO和引入的SO关联 在cmake配置
+
+
+8.JNI类型映射
+
+jboolean
+jbyte
+jchar  2字节
+jshort 2字节
+jint  4字节
+jlong
+jfloat
+jdouble
+
+jobject
+jclass
+jstring
+jxxarray 数组
+void
+
+9. 互相传递
+
+9.1 JNI层 创建对象 返回JAVA
+
+
+
