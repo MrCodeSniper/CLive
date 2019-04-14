@@ -6,8 +6,9 @@
 public native String stringFromJNI();  //           ()Ljava/lang/String;
 方法签名就是 1.没有参数 () 2.返回值得数据类型为String L+对象包名+;
 
+括号内为参数 基本类型为首字母大写  int 为 I
 
-//TODO
+int f(int i,Object object) 对应为   (ILjava/lang/Object;)I
 
 
 
@@ -76,6 +77,10 @@ void
 9. 互相传递
 
 9.1 JNI层 创建对象 返回JAVA
+9.2 JNI层 获取JAVA的方法和属性ID 并调用方法
+9.3 JNI层改变对象的属性值
+9.4 JNI层返回
+
 
 
 
