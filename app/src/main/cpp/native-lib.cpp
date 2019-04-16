@@ -26,7 +26,7 @@ jobject returnPerson(JNIEnv *env,jobject instance){
     jclass clazz_Native=env->FindClass("com/mrcodesniper/jnilive/Person");
     //根据class和方法名和方法签名 拿到方法ID 当前为构造方法
     jmethodID jmethodID1=env->GetMethodID(clazz_Native,"<init>","(Ljava/lang/String;)V");
-    char *name="wulei";
+    char *name="newversion";
     jstring  str=env->NewStringUTF(name);
     //拿到类 构造方法 和方法参数 拿到对象
     jobject person=env->NewObject(clazz_Native,jmethodID1,str);

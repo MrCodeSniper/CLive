@@ -3,8 +3,8 @@
 #cmake最小支持版本
 cmake_minimum_required(VERSION 3.4.1)
 
-
-
+#把目录设置为全局变量
+file(GLOB bzip_c bzip2/*.c)
 
 add_library( # 生成so库的名称后缀  生成的为libnative-lib.so
         native-lib
@@ -17,6 +17,19 @@ add_library( # 生成so库的名称后缀  生成的为libnative-lib.so
 
 
 add_library(lib2 SHARED IMPORTED)
+
+
+# 读取变量
+add_library(
+        BsPatchYwl5320
+
+        SHARED
+
+        ${bzip_c}
+        bspatch.c
+)
+
+
 
 
 # 关联so库 为lib2
@@ -35,7 +48,15 @@ find_library( # 查找系统中的日志库
 
 ## 配置相互依赖关系
 target_link_libraries(
-        #目标库
+#        #目标库
+#        native-lib
+        #合并库
+        BsPatchYwl5320
+
+        #引用其他库 系统库必须加${} 第三方直接写名字 需要换行
+        ${log-lib})
+
+target_link_libraries(
         native-lib
 
         #引用其他库 系统库必须加${} 第三方直接写名字 需要换行
